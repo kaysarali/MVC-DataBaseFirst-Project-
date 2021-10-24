@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <!-- Favicon icon -->
+    <link rel="icon" href="~/assets/images/App_images/favicon.png" type="image/x-icon">
+    <title>Purchase</title>
+
+
+    <!-- Style.css -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/icon/simple-line-icons/css/simple-line-icons.css">
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/purchasedept.css" rel="stylesheet" />
+    <link href="~/Content/sales_style.css" rel="stylesheet" />
+    <link href="~/Content/kaysar_alerts_style.css" rel="stylesheet" />
+
+
+
+    <!-- Script -->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    
+    @*<script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>*@
+   
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    
+    
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/select2.full.min.js"></script>
+
+
+
+</head>
+<body>
+
+    <div id="messagebar" class="messagebar"></div>
+
+
+    @{
+
+        string userimg = Session["EmployeeImage"].ToString();
+        string EmpName = Session["EmployeeName"].ToString();
+    }
+
+    <header class="grid-container">
+
+        <section class="leftside">
+
+            <div class="toplogo">
+                <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+            </div>
+        </section>
+
+        <nav class="rightside">
+            <div class="sidebar-toggle" onclick="sidemenu()">
+                <a href="javascript:void(0)"><i class="icon-menu"></i></a>
+            </div>
+
+
+            <div class="userlogin">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0)" onclick="logoutmenu()">
+
+                            <span><img class="img-circle" src="@Url.Content(userimg)" alt="User Image"></span>
+
+                            <span> <b>@EmpName</b> </span> <i class="icon-arrow-down"></i>
+                        </a>
+
+
+                        <ul class="logoutmenu" id="logoutmenu">
+                            <li><a href="javascript:void(0)" onclick="logoutmenu()"><i class="icon-settings"></i> <span>Settings</span> </a> </li>
+                            <li><a href="javascript:void(0)" onclick="logoutmenu()"><i class="icon-user"></i> <span>Profile</span> </a> </li>
+                            <li><a href="@Url.Action("Logout", "Account")"><i class="icon-logout"></i> <span>Logout</span></a> </li>
+
+                        </ul>
+
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </nav>
+    </header>
+    <!--End Navbar -->
+    <!-- main Content --------------------------------------------------------------------------------------------------->
+    <!-- main Content --------------------------------------------------------------------------------------------------->
+    <main class="main" id="main">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                @RenderBody()
+
+            </div>
+
+            <footer>
+                <div class="footer-Section">
+
+                    <div class="copyright">
+                        &copy; Copyright <strong><span>DELTA ENTERPRISE</span></strong>. All Rights Reserved
+
+                    </div>
+                    <div class="credits">
+                        Web Design &amp Development by Md Kaysar Ali
+                    </div>
+
+                </div>
+            </footer>
+        </div>
+
+
+
+    </main>
+
+    <!-- End main Content ---------------------------------------------------------------------------------------------->
+    <!-- Side-Nav -->
+
+
+    <aside class="sidebar" id="sidebar">
+
+
+        <div class="dropbar" id="dropbar">
+            <ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+
+                        <a href="@Url.Action("PurchasePage", "Purchase")"> <i class="icon-basket-loaded"></i>  <span>Purchase</span>  <i class="icon-arrow-right"></i>   </a>
+
+
+                    </li>
+                    <br />
+
+                    <li>
+                        <a href="@Url.Action("SalesPage", "Sales")"> <i class="icon-briefcase"></i>  <span>Sales</span>  <i class="icon-arrow-right"></i>   </a>
+                    </li>
+                    <br>
+
+
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li>
+                            <a href="@Url.Action("AdminPanelPage", "AdminPanel")"> <i class="icon-people"></i>  <span>Admin Panel</span>   <i class="icon-arrow-right"></i>   </a>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </div>
+    </aside>
+    <!-- End Side-Nav -->
+
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+
+</body>
+</html>
+
+
+
+

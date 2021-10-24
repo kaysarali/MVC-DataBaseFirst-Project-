@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.AttendanceViewModel>
+@using PagedList.Mvc
+
+
+<table  class="producttable tableEmp">
+    <thead>
+        <tr>
+            <th>
+
+                @Ajax.ActionLink("Id", "AttendanceTable", new { SortOrder = ViewBag.SortNameParamAttend }, new AjaxOptions { UpdateTargetId = "AttendanceTableDiv", }, new { @id = "SortOrderlink", style = "color:white" })
+
+            </th>
+
+            <th>Date</th>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+            <th>Late Time</th>
+            <th>Over Time</th>
+            <th>Part Time</th>
+        </tr>
+    </thead>
+    
+
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@Html.DisplayFor(modelItem => item.AttendanceId)</td>
+    <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.AttDate))</td>
+    <td>@Html.DisplayFor(modelItem => item.EmployeeId)</td>
+    <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+    <td>@Html.DisplayFor(modelItem => item.LoginTime)</td>
+    <td>@Html.DisplayFor(modelItem => item.LogoutTime)</td>
+    <td>@Html.DisplayFor(modelItem => item.Late)</td>
+    <td>@Html.DisplayFor(modelItem => item.OverTime)</td>
+    <td>@Html.DisplayFor(modelItem => item.PartTime)</td>
+</tr>
+    }
+
+</table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)of @Model.PageCount
+
+
+<div class="Purchase_Paging_Aria">
+    <div id="AttendPager" class="Purchase_PagingAtt">
+        @Html.PagedListPager(Model, page => Url.Action("AttendanceTable", new { SortOrder = ViewBag.CurrentSortAttend, CurrentFilter = ViewBag.CurrentFilterAttend, Page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<<", LinkToPreviousPageFormat = "Previous", LinkToNextPageFormat = "Next", LinkToLastPageFormat = ">>", })
+    </div>
+</div>
+    
+
+
+
+
+
+    <script>
+        $(function () {
+            $('#AttendPager').on('click', 'a', function () {
+                $.ajax({
+                    url: this.href,
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#AttendanceTableDiv').html(result);
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+    <script>
+        $("#LoadingAttendanceTable").html("")
+    </script>
+

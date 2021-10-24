@@ -1,0 +1,752 @@
+body{
+    background-color: #EBEFF2;
+    font-family: calibri, sans-serif;
+}
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 230px auto;
+    grid-template-rows: 50px;
+}
+
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    top: 0;
+  
+
+}
+
+.leftside{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    background-color: #39444e;
+    height: 50px;
+    transition: 0.5s;
+    z-index: 1;
+}
+
+
+.rightside{
+    grid-column-start: 2;
+    grid-column-end: 3;
+    background-color: #39444e;
+    height: 50px;
+    transition: 0.5s;
+    z-index: 2;
+}
+
+
+.sidebar{
+    position: fixed;
+    width: 230px;
+    height: 100%;
+    background-color: #e3ebf1;
+    left: 0px;
+    top: 0;
+    transition: 0.5s;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+
+.dropbar{
+    margin: 120px 0px 0px 0px;
+
+}
+
+.dropbar ul {
+    padding: 0px;
+    list-style: none;
+}
+
+
+.dropbar ul li a{
+    text-decoration: none;
+    border-bottom: 1px solid white;
+    color: white;
+    font-size: 18px;
+    display: block;
+    padding: 10px 16px;
+    background-color: #3a5795;
+}
+
+.dropbar ul li a:hover{
+    color: white;
+    background-color: #0170ca;
+    font-weight: bold;
+    transition: all 0.5s ease;
+}
+
+
+
+.dropbar ul li a:last-child{
+    border-bottom: 0px
+}
+
+.dropbar ul li ul li{
+    border-bottom: 1px solid white;
+
+}
+
+.dropbar ul li ul li:last-child{
+    border-bottom: none;
+}
+
+.dropbar ul li a i{
+    font-size: 16px;
+    padding: 0px;
+}
+
+
+.dropbar ul li a span{
+    margin: 0px;
+    margin-left: 10px;
+}
+
+
+.dropbar ul li a .icon-arrow-down{
+    float: right;
+    font-size: 12px;
+    margin-top: 9px;
+}
+
+
+.dropbar ul li ul i{
+    margin-left: 14px;
+    font-size: 11px;
+}
+
+
+
+
+
+.dropbar ul li ul a {
+    background-color: #3479b1;
+}
+
+.dropbar ul li ul a:hover {
+    background-color: #0565b4;
+    color: white;
+    font-weight: bold;
+
+}
+
+
+
+
+.purchasemanu{
+    display: none;
+}
+
+.purchasemanuActive{
+    display: block;
+}
+
+.salesmanu{
+    display: none;
+}
+
+.salesmanuActive{
+    display: block;
+}
+
+.empmanu{
+    display: none;
+}
+
+.empmanuActive{
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+.sidebar-toggle {
+    float: left;
+    height: 50px;
+    width: 50px;
+}
+
+.sidebar-toggle a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    padding: 13px;
+}
+
+.toplogo{
+    text-align: center;
+    display: block;
+}
+
+.toplogo img{
+    height: 30px;
+    margin-top: 10px;
+}
+
+
+.userlogin{
+    float: right;
+    margin-right: 30px;
+    margin-top: 5px;
+    height: 40px;
+
+}
+
+
+.userlogin li{
+    list-style: none;
+    color: white;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+}
+
+
+.userlogin li a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.userlogin li a i{
+    font-size: 10px;
+    margin-left: 4px;
+    margin-right: 10px;
+}
+
+
+.userlogin li a span{
+    font-size: 18px;
+}
+
+
+.userlogin li img{
+    height: 40px;
+    width: 40px;
+    margin-right: 5px;
+    border-radius: 20px;
+}
+
+
+.userlogin li ul{
+    margin-top: 5px;
+    position: absolute;
+    right: 10px;
+
+}
+
+
+.userlogin li ul li{
+    background-color: white;
+
+}
+
+
+
+.userlogin li ul li a{
+    color: #666;
+    display: block;
+    background-color: white;
+    padding: 8px 100px 8px 20px;
+	transition: all 0.5s ease;
+
+}
+
+
+.userlogin li ul li a:hover{
+    background-color: #E5E5E5;
+    transition: all 0.5s ease;
+
+}
+
+.userlogin li ul li a i{
+    font-size: 16px;
+
+
+}
+
+.logoutmenu{
+    display: none;
+}
+
+.logoutmenuactive{
+    display: block;
+
+}
+
+.main{
+    width: auto;
+    height: 100%; 
+    margin-left: 230px;
+    transition: 0.5s;
+    margin-top: 50px;
+    color: #666;
+}
+
+.mainleft{
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 3px;
+    border: 4px solid #205493;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+}
+
+
+/* --############################ 10/10/2021 Working ############################################-- */
+
+.mainright{
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    height: 471px;
+    --overflow-y: auto;
+    --border-radius: 10px;
+    margin-left: -14px;
+    --border: 7px solid #4c94e0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-radius: 3px;
+    border: 4px solid #205493;
+}
+
+
+.top_right{
+    --background-color: #4b5366;
+    background-color: white;
+    margin-left: -14px;
+    margin-top: 15px;
+    height: 40px;
+    padding: 6px 20px;
+    border: 1px solid #205493;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #205493;
+}
+
+.top_right .btn{
+   
+    margin-left:10px;
+    width: 26px;
+    height: 26px;
+    float:right;
+    background-color: #205493;
+    border:0px ;
+}
+
+
+.top_right .fa{
+    
+    font-size: 14px;
+    padding: 10px;
+
+    
+}
+
+.top_right .btn-icon{
+    margin-top: -8px;
+    margin-left: -3px;
+}
+
+
+.top_right .div-filter{
+    margin: 0px;
+    padding: 0px;
+    margin-top: 1px;
+    color: #205493;
+}
+
+.top_right .fa-filter{
+    margin: 0px;
+    padding: 0px;
+    font-size: 20px;
+
+}
+
+
+.topleft{
+    background-color: #EBEFF2;
+    --padding: 20px;
+    margin-top: 15px;
+    height: 40px;
+    overflow: hidden;
+}
+
+
+table tr td{
+    
+    --border: 2px solid black;
+}
+
+
+.Purchase_Paging{
+    position:relative;
+    bottom: -200px;
+    width: 100%;
+    height: 40px;
+}
+
+
+.hint-text{
+    font-size: 14px;
+}
+
+.clearfix{
+    font-size: 12px;
+    float:right;
+}
+/* --############################ 10/10/2021 Working ############################################-- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mainright_bottom{
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    height: 343px;
+    overflow-y: auto;
+    border-radius: 10px;
+    margin-left: -14px;
+    border: 7px solid #4c94e0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+
+
+
+/* ---------------------------------------------------- */
+.title_text{
+
+    font-family: Arial;
+    font-size: 35px;
+    font-weight: bold;
+    color:  #205493;
+    margin-top: -5px;
+    
+}
+
+/* ---------------------------------------------------- */
+.form-control{
+    height: 30px;
+    font-size: 15px;
+}
+
+table {
+    width: 100%;
+}
+
+
+
+.textfield{
+    padding: 0px 10px 15px 0px;
+    width: 120px;
+
+}
+
+.textelement{
+    padding: 0px 0px 15px 0px;
+
+}
+
+.form-control{
+    height: 26px;
+}
+.productimage{
+    width: 100px;
+    height: 100px;
+    float:left;
+}
+.upimage{
+    display: none;
+}
+
+.lebelupimage{
+    background-color: #4c94e0;
+    color: white;
+    padding: 5px 10px;
+    float: right;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.btn {
+    padding: 4px 0px;
+}
+
+.btninsert{
+    width: 100%;
+    margin-top: 29px;
+    font-weight: bold;
+}
+
+.btnSave{
+    width: 100%;
+    font-weight: bold;
+    background-color: #4c94e0;
+    border: 0px;
+}
+
+.textfield span{
+    font-size: 20px;
+    margin-top: -10px;
+    display: block;
+    font-weight: bold;
+    color: #4c94e0;
+}
+
+.footer-Section{
+    width: 100%;
+    height: 70px;
+    background-color: #39444e;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 20px 0px;
+    box-shadow: 0px 5px 10px 2px rgba(10, 10, 10, 0.175);
+}
+.copyright{
+    margin: 0px auto;
+    color: #349ad1;
+    text-align: center;
+    margin-top: 10px;
+}
+.credits{
+    margin: 0px auto;
+    color: #a2cce3;
+    text-align: center;
+}
+
+
+@media screen and (max-width:1024px) {
+    .sidebar{
+        width: 50px;
+    }
+    .main{
+        margin-left: 50px;
+    }
+
+    .dropbar ul li a span{
+        display:none;
+    }
+    
+    .dropbar ul li a i:last-child {
+        display:none;
+    }
+
+    .dropbar .subdropbar{
+        margin-left: 50px;
+        position: absolute;
+        width: 170px;
+        margin-top: -49px;
+        box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+        transition: 0.5s;
+    }
+
+}
+
+
+
+@media screen and (max-width:768px) {
+    .leftside{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+      
+    .rightside{
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+
+    .sidebar{
+        position: absolute;
+        left: -50px;
+    }
+
+    .main{
+        margin-left: 0px;
+        margin-top: 95px;
+    }
+
+    .mainright{
+        margin-left: 0px;
+    }
+
+    .mainright_bottom{
+        margin-left: 0px;
+    }
+
+    .top_right{
+        margin-left: 0px;
+    }
+
+    .title_text{
+        margin-top: 10px;
+        font-size: 20px;
+    }
+}
+
+
+
+
+
+
+/* ---------------------- toggle Side bar (max-width:1024px)--------------------------- */
+.sidebar1024px{
+    width: 50px;
+}
+
+.main1024px{
+    margin-left: 50px;
+}
+
+.dropbar1024px ul li a span{
+    display:none;
+}
+.dropbar1024px ul li a i:last-child {
+    display:none;
+}
+
+.dropbar1024px .subdropbar{
+    margin-left: 50px;
+    position: absolute;
+    width: 170px;
+    margin-top: -49px;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+/* ---------------------- End toggle Side bar --------------------------- */
+
+
+
+
+/* ---------------------- toggle Side bar (max-width:768px)--------------------------- */
+.sidebar768px{
+    width: 230px;
+
+}
+
+.main768px{
+    margin-left: 230px;
+}
+
+.dropbar768px ul li a span{
+    display:inline;
+}
+.dropbar768px ul li a i:last-child {
+    display:inline;
+}
+
+.dropbar768px .subdropbar{
+    margin-left: 230px;
+    width: 170px;
+    margin-top: -49px;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+    transition: 0.5s;
+}
+
+.subdropbar li {
+    display: block;
+}
+
+/* ---------------------- End toggle Side bar --------------------------- */
+
+
+
+
+
+/* ---------------------- toggle Side bar (max-width:smsize)--------------------------- */
+.sidebarsmsize{
+    width: 230px;
+    left: 0px;
+}
+
+.mainsmsize{
+    margin-left: 0px;
+}
+
+.dropbarsmsize ul li a span{
+    display:inline;
+}
+.dropbarsmsize ul li a i:last-child {
+    display:inline;
+}
+
+.dropbarsmsize .subdropbar{
+    margin-left: 230px;
+    position: absolute;
+    width: 170px;
+    margin-top: -49px;
+    box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------------------- End toggle Side bar --------------------------- */
+
+
+
+
+
+
+
+/* ----------------------------------------------------------------- */
+  
+.producttable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+.producttable thead tr{
+    background-color: #4c94e0;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.producttable thead th{
+    padding: 8px 20px;
+}
+
+.producttable img{
+    border-radius: 20px;
+    height: 35px;
+}
+   
+.producttable td {
+    border-bottom: 1px solid rgb(155, 154, 154);
+    padding: 5px 15px;
+    font-size: 12px;
+}
+  
+.producttable tbody td {
+  text-align: center;
+  font-size: 14px;
+  
+}
+
+
+

@@ -1,0 +1,142 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.SalesTempViewModel
+
+@using (Ajax.BeginForm("EditAction", "Sales", new AjaxOptions { UpdateTargetId = "SalesTable" }))
+{
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <td colspan="2" class="textfield">
+                <span> Edit Section</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="textelement">
+                <input type="button" id="btnnewcust" value="New Customar" class="btn btn-success btnnewcust" disabled />
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Sales Id</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.SalesId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.SalesId, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="textfield">Sales Date</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.SalesDate, new { htmlAttributes = new { @Value = Model.SalesDate.ToString("MM/dd/yyyy"), @class = "form-control"} })
+                @Html.ValidationMessageFor(model => model.SalesDate, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+
+
+        <tr>
+            <td class="textfield">Mobile No.</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.CustMobile, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CustMobile, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Customar Name</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.CustomarName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CustomarName, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Address</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.CustAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CustAddress, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Product Name</td>
+            <td class="textelement">
+                @Html.DropDownListFor(model => model.ProductId, new SelectList(ViewBag.ProductList, "ProductId", "ProductName"), "Select Product", htmlAttributes: new { @class = "form-control", id = "ddlEditProductName", style="Padding : 0px;" })
+                @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Product Model</td>
+            <td class="textelement">
+                @Html.DropDownListFor(model => model.ProductModelId, new SelectList(string.Empty, "Value", "Text"), "Select Product Model", new { @class = "form-control", id = "ddlEditProductModel", style="Padding : 0px;" })
+                @Html.ValidationMessageFor(model => model.ProductModelId, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Quentity</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+
+        <tr>
+            <td class="textfield">Unit Price</td>
+            <td class="textelement">
+                @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+            </td>
+        </tr>
+        @Html.HiddenFor(model => model.CustomarId)
+        @Html.HiddenFor(model => model.EmployeeId)
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Update" id="btnUpdate" class="btn btn-success btninsert" />
+            </td>
+        </tr>
+
+    </table>
+}
+
+<input type="submit" value="Sales Bill Print" id="btnUpdate" class="btn btn-info btnbillprint"  disabled/>
+
+
+
+
+@*+++#################################################################################################################+++*@
+
+
+
+<script>
+    $(function () {
+        $('#ddlEditProductName').change(function () {
+            $('#ddlEditProductModel').empty();
+            $.ajax({
+                type: "POST",
+                url: "/Sales/GetProductModelMethod",
+                datatype: "Json",
+                data: { ProductId: $('#ddlEditProductName').val() },
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        $('#ddlEditProductModel').append('<option value="' + value.ProductModelId + '">' + value.ModelName + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+
+<script>
+    $('#btnUpdate').click(
+        function () {
+            $('#EditSection').hide();
+            $('#InsertSalesSection').show();
+        });
+</script>

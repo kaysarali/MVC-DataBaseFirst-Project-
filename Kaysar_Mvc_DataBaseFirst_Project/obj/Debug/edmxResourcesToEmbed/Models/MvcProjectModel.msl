@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MvcProjectDBModelStoreContainer" CdmEntityContainer="MvcProjectDBEntities">
+    <EntitySetMapping Name="Attendances">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Attendance">
+        <MappingFragment StoreEntitySet="Attendance">
+          <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
+          <ScalarProperty Name="AttDate" ColumnName="AttDate" />
+          <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+          <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+          <ScalarProperty Name="Late" ColumnName="Late" />
+          <ScalarProperty Name="OverTime" ColumnName="OverTime" />
+          <ScalarProperty Name="PartTime" ColumnName="PartTime" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customars">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Customar">
+        <MappingFragment StoreEntitySet="Customar">
+          <ScalarProperty Name="CustomarId" ColumnName="CustomarId" />
+          <ScalarProperty Name="CustomarName" ColumnName="CustomarName" />
+          <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+          <ScalarProperty Name="CustMobile" ColumnName="CustMobile" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+          <ScalarProperty Name="EmpUserName" ColumnName="EmpUserName" />
+          <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="EmpEmail" ColumnName="EmpEmail" />
+          <ScalarProperty Name="EmpPassword" ColumnName="EmpPassword" />
+          <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+          <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
+          <ScalarProperty Name="RoletbId" ColumnName="RoletbId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductModels">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.ProductModel">
+        <MappingFragment StoreEntitySet="ProductModel">
+          <ScalarProperty Name="ProductModelId" ColumnName="ProductModelId" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Purchase">
+        <MappingFragment StoreEntitySet="Purchase">
+          <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
+          <ScalarProperty Name="VoucherNo" ColumnName="VoucherNo" />
+          <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+          <ScalarProperty Name="ImgPath" ColumnName="ImgPath" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ProductModelId" ColumnName="ProductModelId" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roletbs">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Roletb">
+        <MappingFragment StoreEntitySet="Roletb">
+          <ScalarProperty Name="RoletbId" ColumnName="RoletbId" />
+          <ScalarProperty Name="RollName" ColumnName="RollName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Sale">
+        <MappingFragment StoreEntitySet="Sales">
+          <ScalarProperty Name="SalesId" ColumnName="SalesId" />
+          <ScalarProperty Name="MemoNo" ColumnName="MemoNo" />
+          <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="ProductModelId" ColumnName="ProductModelId" />
+          <ScalarProperty Name="CustomarId" ColumnName="CustomarId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="MvcProjectDBModel.Supplier">
+        <MappingFragment StoreEntitySet="Supplier">
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,225 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.PurchaseViewModel
+
+<div class="col-md-4 col-xl-3">
+    <div class="topleft">
+        <div class="title_text"><samp> <i class="icon-basket-loaded"></i> Purchase</samp></div>
+    </div>
+
+    <div class="mainleft">
+        @using (Ajax.BeginForm("InsertPurchase", "Purchase", new AjaxOptions { UpdateTargetId = "", OnSuccess = "getresult" }, new { enctype = "multipart/form-data" }))
+        {
+
+            @Html.HiddenFor(s => s.PurchaseId, new { @id = "txtPurchaseId" })
+            @Html.HiddenFor(s => s.EmployeeId, new { @id = "txtEmployeeId" })
+
+            <table>
+                <tr><td colspan="2" class="textfield"> <span> Purchase Section</span></td></tr>
+
+                <tr>
+                    <td class="textfield">Voucher No.</td>
+                    <td class="textelement">
+                        @Html.EditorFor(model => model.VoucherNo, new { htmlAttributes = new { @class = "form-control", id = "txtVoucherNo" } })
+                    </td>
+                    @Html.ValidationMessageFor(model => model.VoucherNo, "", new { @class = "text-danger" })
+                </tr>
+
+                <tr>
+                    <td class="textfield">Date</td>
+                    <td class="textelement">
+                        @Html.EditorFor(model => model.PurchaseDate, new { htmlAttributes = new { @class = "form-control", type = "date", id = "txtPurchaseDate", style = "width: 100%;" } })
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="textfield">Product Name</td>
+                    <td class="textelement">
+                        @Html.DropDownListFor(model => model.ProductId, new SelectList(string.Empty, "Value", "Text"), "Select Product Model", new { @class = "form-control", id = "ddlProductName", style = "width: 100%;" })
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="textfield">Product Model</td>
+                    <td class="textelement">
+                        @Html.DropDownListFor(model => model.ProductModelId, new SelectList(string.Empty, "Value", "Text"), "Select Product Model", new { @class = "form-control", id = "ddlProductModel", style = "width: 100%;" })
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="textfield">Supplier Name</td>
+                    <td class="textelement">
+                        @Html.DropDownListFor(model => model.SupplierId, new SelectList(string.Empty, "Value", "Text"), "Select Supplier", new { @class = "form-control", id = "ddlSupplier", style = "width: 100%;" })
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="textfield">Quentity</td>
+                    <td class="textelement">
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", id = "txtQuantity" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="textfield">Total Price</td>
+                    <td class="textelement">
+                        @Html.EditorFor(model => model.TotalPrice, new { htmlAttributes = new { @class = "form-control", id = "txtTotalPrice" } })
+                        @Html.ValidationMessageFor(model => model.TotalPrice, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td rowspan="2">
+                        <img class="productimage" src="/images/App_images/noimageavailable.jpg" alt="" ID="ImgFile" height="80" width="80">
+                    </td>
+
+
+                    <td>
+                        <input id="upimage" class="upimage" type="file" name="ImageFile" onchange="readURL(this);" style="display:none">
+                        <label for="upimage" class="lebelupimage">Upload Image</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" id="btnAddProduct" class="btn btn-success btninsert" value="Insert" />
+                    </td>
+                </tr>
+
+            </table>
+        }
+
+    </div>
+</div>
+
+
+
+<div class="col-md-8 col-xl-9">
+
+    <div class="top_right">
+        @using (Ajax.BeginForm("SearchCustomers", "Purchase", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "TotalSalesTable", OnSuccess = "SearchOnSuccess" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <table>
+
+                <tr>
+                    <td><div class="div-filter">  <span><i class="fa fa-filter"></i></span></div></td>
+                    <td style="min-width: 30px;"></td>
+
+                    <td class="textfield" style="width: 110px;"> <b>Select Category :</b> 	</td>
+
+                    <td class="textelement">
+                        <select class="form-control" id="PurchaseCategory" name="PurchaseCategory" style="padding:0px">
+                            <option>Select Category</option>
+                            <option>Purchase ID</option>
+                            <option>Voucher No</option>
+                            <option>Product Name</option>
+                        </select>
+                    </td>
+
+                    <td style="min-width: 30px;"></td>
+
+                    <td class="textfield" style="width: 80px;"> <b>Search By :</b> </td>
+
+                    <td class="textelement">
+                        @Html.TextBox("txtboxSearch", "", new { @class = "form-control txtboxSearch" })
+                    </td>
+
+                    <td>
+                        <button type="submit" class="btn btn-primary" id="btnSearch">
+                            <div class="btn-icon"><i class="fa fa-search"></i></div>
+                        </button>
+                    </td>
+
+
+                </tr>
+            </table>
+
+        }
+
+
+    </div>
+
+
+    <div class="mainright">
+
+        <table><tr id="LoadingStatus1" style="color:red"> </tr></table>
+        <!--  Purchase Table Show-->
+        <div id="TotalSalesTable">
+
+        </div>
+
+
+        @Ajax.ActionLink("Refresh List", "SearchCustomers",
+       new { }, new AjaxOptions { UpdateTargetId = "TotalSalesTable", }, new { @id = "PurchaseTableShowlink" })
+
+        <div class="report">
+            <a href="@Url.Action("ExportReport")">Report</a>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <!-- Delete Purchase Section Open-->
+    <div class="modal fade" id="DeleteConfirmation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="toplogo">
+                        <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+                    </div>
+                </div>
+
+
+                <div class="modal-body">
+                    @Html.HiddenFor(s => s.PurchaseId, new { @id = "DelPurchaseId" })
+                    <h2 style="color:red; font-size:24px; font-weight:600; padding:20px 0 25px 10px">Are You Sure to Delete This Record?</h2>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-danger" data-dismiss="modal" onclick="ConfirmDelete()">Delete</a>
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Purchase Section End-->
+    <!-- Details Purchase Section Open-->
+    <div class="modal fade" id="DetailsModalSection">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <div class="toplogo">
+                        <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+                    </div>
+                </div>
+
+
+                <div class="modal-body">
+                    @Html.HiddenFor(s => s.PurchaseId, new { @id = "DetailsPurchaseId" })
+
+                    <table id="DetailsData" style="font-size:15px"></table>
+                </div>
+
+
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-primary" data-dismiss="modal">Done</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Details Purchase Section End-->
+</div>
+
+
+<script src="~/Scripts/CustomPurchase.js"></script>

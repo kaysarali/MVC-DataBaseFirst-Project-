@@ -1,0 +1,56 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.SalesTempViewModel
+
+<div class="modal-body">
+
+    <h2 style="color:red; font-size:24px; font-weight:600; padding:0px 0px 0px 0px; margin:10px 0px 20px 30px" >Are You Sure to Delete This Record?</h2>
+    <dl class="dl-horizontal">
+        <dt>Memo No</dt>
+        <dd> @Html.DisplayFor(model => model.MemoNo)</dd>
+
+        <dt> Sales Date</dt>
+        <dd>@Html.DisplayFor(model => model.SalesDate)</dd>
+
+
+
+        <dt>Customar Name</dt>
+        <dd>@Html.DisplayFor(model => model.CustomarName)</dd>
+
+        <dt>Customar Mobile</dt>
+        <dd>@Html.DisplayFor(model => model.CustMobile)</dd>
+
+        <dt>Customar Address</dt>
+        <dd>@Html.DisplayFor(model => model.CustAddress)</dd>
+
+        <dt>Product Name</dt>
+        <dd>@Html.DisplayFor(model => model.ProductName) @Html.DisplayFor(model => model.ModelName)</dd>
+
+        <dt>Quantity</dt>
+        <dd>@Html.DisplayFor(model => model.Quantity)</dd>
+
+        <dt>Unit Price</dt>
+        <dd>@Html.DisplayFor(model => model.UnitPrice)</dd>
+    </dl>
+
+</div>
+
+<div class="modal-footer">
+
+    @using (Ajax.BeginForm("DeleteAction", "Sales", new AjaxOptions { UpdateTargetId = "SalesTable" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SalesId)
+        <input type="submit" value="Delete" class="btn btn-danger" id="btnDelete" style="padding:5px 80px" />
+        <button type="button" class="btn btn-success" data-dismiss="modal" style="padding:5px 80px">Close</button>
+
+    }
+
+</div>
+
+
+
+<script>
+    $('#btnDelete').click(
+        function () {
+            $('#DeleteModel').modal('hide');
+        });
+</script>

@@ -1,0 +1,44 @@
+
+.messagebar{
+  width: 500px;
+  height: 45px;
+  position: fixed;
+  margin:auto;
+  top: -45px;
+  right:350px;
+  z-index: 2;
+  border-radius: 0px 0px 10px 10px;
+  transition: 1s;
+}
+
+.messagebarinsert{
+  background-color: #005FAF;
+  top: 0px;
+  transition: 1s;
+}
+
+.messagebarupdate{
+  background-color: #019726;
+  top: 0px;
+  transition: 1s;
+}
+
+.messagebardelete{
+  background-color: #E72B2B;
+  top: 0px;
+  transition: 1s;
+}
+
+.messagebar h4{
+  color: white;
+  margin-top: 13px;
+  text-align: center;
+}
+
+
+
+
+#innertext h4{
+  margin: 15px 0px 0px 40px;
+}
+

@@ -1,0 +1,113 @@
+.mainleft table tr td{
+    --border: 1px solid black;
+}
+
+.btnnewcust{
+    width: 100%;
+    font-weight: bold;
+}
+
+
+.mainsalesright {
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    height: 305px;
+    overflow-y: auto;
+    --border-radius: 10px;
+    margin-left: -14px;
+    border: 2px solid #55a5db;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-radius: 3px;
+}
+
+
+.mainsalesright_bottom{
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    height: 287px;
+    overflow-y: auto;
+    --border-radius: 10px;
+    margin-left: -14px;
+    border: 2px solid #55a5db;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    border-radius: 3px;
+}
+
+
+.btnbillprint{
+    width: 100%;
+    margin-top: 29px;
+    font-weight: bold;
+}
+
+
+/* ------------------------------------------------------------------------- */
+
+
+
+.header-box{
+    margin-top: 12px;
+}
+
+.bgSelectProduct{
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #4c94e0;
+}
+.SelectProducttext{
+    color: #4c94e0;
+    font-weight: bold;
+}
+
+
+
+.maindatalist{
+    background-color: white;
+    padding: 20px;
+    margin-top: 15px;
+    border-radius: 8px;
+    border: 2px solid #4c94e0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+
+}
+
+
+
+
+
+
+
+/* ----------------------------------------------------------------- */
+  
+
+@media screen and (max-width:768px) {
+
+    .mainsalesright{
+        margin-left: 0px;
+    }
+
+    .mainsalesright_bottom{
+        margin-left: 0px;
+    }
+
+}
+
+@media screen and (max-width:958px) {
+
+    .title_text{
+        font-size: 25px;
+    }
+
+}
+
+
+@media screen and (max-width:770px) {
+
+    .title_text{
+        font-size: 20px;
+    }
+
+}

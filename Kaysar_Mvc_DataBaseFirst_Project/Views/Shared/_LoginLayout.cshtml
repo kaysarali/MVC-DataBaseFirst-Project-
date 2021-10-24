@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="~/assets/images/App_images/favicon.png" type="image/x-icon">
+    <title>Delta Login</title>
+
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/css/login_style.css">
+    <link href="~/Content/sweetalert2.min.css" rel="stylesheet" />
+
+    <script src="~/Scripts/sweetalert2.min.js"></script>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="row h-100">
+
+            <div class="col-12 my-auto" style="margin:80px 0px 80px 0px">
+
+                <div class="card">
+                    <div class="login-card ">
+
+                        <div class="grid-container">
+                            <div class="leftSide">
+                                <div class="deltalogo">
+                                </div>
+                            </div>
+
+                            @RenderBody()
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/assets/js/main.js" type="text/javascript"></script>
+
+</body>
+</html>

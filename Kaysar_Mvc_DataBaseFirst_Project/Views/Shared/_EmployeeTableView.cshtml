@@ -1,0 +1,82 @@
+﻿@model PagedList.IPagedList<Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.EmployeeViewModel>
+@using PagedList.Mvc
+
+
+<table class="producttable tableEmp" style="font-size:60px">
+    <thead>
+        <tr>
+            <th>
+                @Ajax.ActionLink("Id", "EmployeeTable", new { SortOrder = ViewBag.SortNameParam }, new AjaxOptions { UpdateTargetId = "TotalSalesTable", }, new { @id = "SortOrderlink", style="color:white" })
+            </th>
+
+            <th>Name</th>
+            <th>User Name</th>
+            <th>Address</th>
+            <th>Date Of Birth</th>
+            <th>Email Address</th>
+            <th>Password</th>
+            <th>Roll</th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+            <th>Image</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.EmployeeId)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpUserName)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpAddress)</td>
+            <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.DateOfBirth))</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpEmail)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpPassword)</td>
+
+            <td class="RollName">@Html.DisplayFor(modelItem => item.RollName)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.LoginTime)</td>
+            <td>@Html.DisplayFor(modelItem => item.LogoutTime)</td>
+            <td> <img src="@Url.Content(item.ImgPath)" height="40" width="40" /></td>
+
+            <td>
+                <a class="btnEdit" href="javascript:void(0)" onclick='EditEmployee("@item.EmployeeId")'><i class='glyphicon glyphicon-edit'></i></a>&nbsp;
+                <a class="btnDelete" href="javascript:void(0)" onclick='DeleteEmployee("@item.EmployeeId")'><i class='glyphicon glyphicon-trash'></i> </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)of @Model.PageCount
+
+<div class="Purchase_Paging_Aria">
+    <div id="myPager" class="Purchase_Paging"> @Html.PagedListPager(Model, page => Url.Action("EmployeeTable", new { SortOrder = ViewBag.CurrrentSort, CurrentFilter = ViewBag.CurrentFilter, Page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<<", LinkToPreviousPageFormat = "Previous", LinkToNextPageFormat = "Next", LinkToLastPageFormat = ">>", })</div>
+</div>
+
+
+
+    <script>
+        $(function () {
+            $('#myPager').on('click', 'a', function () {
+                $.ajax({
+                    url: this.href,
+                    type: 'GET',
+                    cache: false,
+                    success: function (result) {
+                        $('#TotalSalesTable').html(result);
+
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+
+
+    <script>
+        $("#LoadingStatus1").html("")
+    </script>
+

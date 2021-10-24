@@ -1,0 +1,203 @@
+@import url("textboxstyle.css");
+
+body {
+    height: 100%;
+    font-size: 15px;
+    overflow-x: hidden;
+    background-color: #E5E5E5;
+    font-family: Calibri, sans-serif; 
+}
+
+
+html{
+    height: 100%;
+}
+
+.container {
+    height: 100%;
+}
+
+
+
+/* =======================
+      Login Card css
+ ======================= */
+
+.card{
+    background-color: #E5E5E5;
+    border: 0px;
+}
+
+.login-card {
+    max-width: 750px;
+    background-color: white;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); 
+    margin: 0px auto;
+
+}
+
+
+
+.grid-container{
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
+
+
+.leftSide{
+    background-color: #39444e;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    display: flex;
+    align-items: center;
+}
+
+.rightSide{
+    padding: 20px;
+    background-color: white;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+
+.rightSide h3 {
+    font-size: 25px;
+    margin: 25px; 
+    color: #F57C00;
+    font-weight: bold;
+}
+
+.textforpass a{
+    font-weight:bold;
+    color: #F57C00;
+}
+
+
+.textforpass * a:focus, * a:hover{
+    text-decoration: none;
+    color: #F57C00;
+    transition: 0.5s;
+}
+
+
+.btnlogin{
+    margin-top: 40px;
+    width: 80%;
+    background-color: #F57C00;
+    color: white;
+    transition: 0.5s;
+}
+
+.btnlogin:hover{
+    background-color: #c76300;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); 
+
+}
+
+
+.btnAttachfile{
+    margin-top: 40px;
+    height: 40px;
+    width: 100%;
+    background-color: #39444e;
+    color: white;
+    transition: 0.5s;
+}
+
+.photoAttach {
+    display: none;
+}
+
+.lebelphotoAttach{
+    padding: 10px 50px;
+    background-color: #39444e;
+    color: white;
+    text-align: center;
+    float: right;
+    border-radius: 4px;
+}
+
+
+.btnsighup {
+    margin-top: 40px;
+    width: 90%;
+    background-color: #F57C00;
+    color: white;
+    transition: 0.5s;
+}
+
+.textsignup{
+    margin-top: 20px;
+}
+
+.textsignup a{
+    font-weight:bold;
+}
+
+.deltalogo{
+    height: 220px;
+    width: 220px;
+    margin: 0 auto;
+    background-image: url(../images/App_images/delta_logo.jpg);
+    background-size: 220px 220px;
+}
+
+
+
+.rightSide table samp {
+    padding-bottom: 10px;
+    color: #717171;
+}
+
+.rightSide table td{
+    padding: 0px 10px 0px 4px;
+    color: #717171;
+}
+.rightSide input{
+    margin-bottom: 20px;
+}
+
+
+
+/* ------------------------------------------------------------------------------------------- */
+
+.md-input-wrapper {
+    position: relative;
+    padding-top: 4px;
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+    
+
+@media screen and (max-width:576px) {
+
+
+    .leftSide{
+        background-color: white;
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
+    
+    .rightSide{
+        background-color: white;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        margin-top: 50px;
+    }
+
+    .deltalogo{
+        height: 50px;
+        width: 220px;
+        margin-top: 50px;
+        background-image: url(../images/App_images/delta_top_logo.jpg);
+        background-size:  220px  50px;
+        background-repeat: no-repeat;
+        
+    }
+  }
+
+
+
+
+

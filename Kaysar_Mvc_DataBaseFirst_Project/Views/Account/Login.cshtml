@@ -1,0 +1,120 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.EmployeeViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@Html.Raw(TempData["LoingMassage"])
+
+
+<div class="rightSide">
+
+    <h3 class="text-center">
+        Login Delta Enterprise
+    </h3>
+
+
+
+    <div class="row">
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="col-md-12">
+                <div class="md-input-wrapper">
+                    @Html.EditorFor(model => model.EmpUserName, new { htmlAttributes = new { @class = "md-form-control", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.EmpUserName, "", new { @class = "text-danger" })
+                    <label>User Name</label>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="md-input-wrapper">
+                    @Html.EditorFor(model => model.EmpPassword, new { htmlAttributes = new { @class = "md-form-control", type = "password", required = "required" } })
+                    @Html.ValidationMessageFor(model => model.EmpPassword, "", new { @class = "text-danger" })
+                    <label>Password</label>
+                </div>
+            </div>
+
+
+            <div class="col-sm-7">
+                <div class="rkmd-checkbox checkbox-rotate checkbox-ripple m-b-25">
+
+                    <label class="input-checkbox checkbox-primary" style="margin-top:23px">
+                        <input type="checkbox" id="checkbox">
+                        <span class="checkbox"></span>
+                    </label>
+
+
+                    <div class="captions">Remember Me</div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-5  text-right textforpass">
+                <a href="#"> Forget Password?</a>
+            </div>
+
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btnlogin">LOGIN</button>
+            </div>
+
+        }
+
+
+        <div class="col-md-12 text-center textsignup">
+            <span class="text-muted">Don't have an account?</span>
+            @Html.ActionLink("Sign up Now", "SignUp", "Account")
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+    function AdminPermit() {
+        Swal.fire({
+            title: 'Oops...',
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            text: 'Your Registration have been Successfully but Your Need to Permit from Admin for login!!!',
+            confirmButtonText: 'Done',
+        })
+    }
+</script>
+
+
+<script>
+    function NotAuthenticatedUser() {
+        Swal.fire({
+            title: 'Oops...',
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            text: 'You are not Authenticated User Please do Registration !!!',
+            confirmButtonText: 'Done',
+        })
+    }
+</script>
+
+
+
+@if (ViewBag.AdminPermit == "Show")
+{
+    <script>AdminPermit();</script>
+    ViewBag.AdminPermit = "";
+}
+
+
+@if (ViewBag.NotAuthenticatedUser == "Show")
+{
+    <script>NotAuthenticatedUser();</script>
+    ViewBag.NotAuthenticatedUser = "";
+}

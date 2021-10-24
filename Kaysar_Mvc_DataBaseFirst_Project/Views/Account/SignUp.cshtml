@@ -1,0 +1,168 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.EmployeeViewModel
+
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="rightSide">
+
+    <h3 class="text-center">
+        Create Account
+    </h3>
+
+    @using (Html.BeginForm("SignUp", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(false, "", new { style = "color:red" })
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <label>Full Name</label>
+                @Html.ValidationMessageFor(model => model.EmpName, "", new { style = "color:red; font-size:12px" })
+                @Html.EditorFor(model => model.EmpName, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+
+
+            <div class="col-md-6">
+                <label>User Name</label>
+                @Html.ValidationMessageFor(model => model.EmpUserName, "", new { style = " color:red; font-size:12px " })
+                @Html.EditorFor(model => model.EmpUserName, new { htmlAttributes = new { @class = "form-control" } })
+
+
+            </div>
+
+
+            <div class="col-md-12">
+                <label>Address</label>
+                @Html.ValidationMessageFor(model => model.EmpAddress, "", new { style = " color:red; font-size:12px" })
+                @Html.EditorFor(model => model.EmpAddress, new { htmlAttributes = new { @class = "form-control" } })
+
+
+            </div>
+
+            <div class="col-md-6">
+                <label>Date of Birth</label>
+                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { style = " color:red; font-size:12px" })
+                @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+
+            </div>
+
+
+            <div class="col-md-6">
+                <label>Email</label>
+                @Html.ValidationMessageFor(model => model.EmpEmail, "", new { style = " color:red; font-size:12px" })
+                @Html.EditorFor(model => model.EmpEmail, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+
+
+            <div class="col-md-6">
+                <label>Password</label>
+                @Html.ValidationMessageFor(model => model.EmpPassword, "", new { style = " color:red; font-size:12px" })
+                @Html.EditorFor(model => model.EmpPassword, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+
+
+            </div>
+
+            <div class="col-md-6">
+
+                <label>Conf Password</label>
+                @Html.ValidationMessageFor(model => model.RePassword, "", new { style = " color:red; font-size:12px" })
+                @Html.EditorFor(model => model.RePassword, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+
+
+            </div>
+
+
+            <div class="col-5" style="display:inline">
+                <img src="~/images/App_images/noimageavailable.jpg" alt="" style="margin-left:20px; height:120px" ID="ImgFile">
+            </div>
+
+            <div class="col-7" style="display:inline">
+                <input type="file" id="photoAttach" class="photoAttach" name="ImageFile" style="display:none" onchange="readURL(this);">
+                <label for="photoAttach" class="lebelphotoAttach" style="margin:40px 20px 0px 0px">Upload Photo</label>
+            </div>
+
+
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btnsighup">SIGH UP</button>
+            </div>
+
+            <div class="col-md-12 text-center textsignup">
+                <span class="text-muted">Don't have an account?</span>
+                @Html.ActionLink("Already a member", "Login", "Account")
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+<script>
+    function UserAlreadyExists() {
+        Swal.fire({
+            title: 'Oops...',
+            icon: 'info',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            text: 'This user name already Exists, Please choose another user name!',
+            confirmButtonText: 'Done',
+        })
+    }
+</script>
+
+<script>
+    function SuccessfullRegistration() {
+        Swal.fire({
+            title: 'Success',
+            text: "Your Registration has been Successfully Completed!",
+            icon: 'success',
+            showConfirmButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Done',
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                window.location.href = "/Account/Login";
+            }
+        })
+    }
+</script>
+
+
+
+
+@if (ViewBag.Registration == "Show")
+{
+    <script>SuccessfullRegistration();</script>
+    ViewBag.Registration = "";
+}
+
+
+@if (ViewBag.UserAlreadyExists == "Show")
+{
+    <script>UserAlreadyExists();</script>
+    ViewBag.UserAlreadyExists = "";
+}
+
+
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#ImgFile').attr('src', e.target.result)
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        }
+</script>
+

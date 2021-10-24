@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ef97029d63124b0d99c76e95d86cc935" Name="Diagram1">
+        <EntityTypeShape EntityType="MvcProjectDBModel.Attendance" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Customar" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Employee" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Product" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.ProductModel" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Purchase" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Roletb" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Sale" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MvcProjectDBModel.Supplier" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Attendanc__Emplo__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Sales__CustomarI__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Employee__Roletb__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Purchase__Employ__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Sales__EmployeeI__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__ProductMo__Produ__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Purchase__Produc__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Sales__ProductMo__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="MvcProjectDBModel.FK__Purchase__Suppli__398D8EEE" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,290 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MvcProjectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="AttendanceId" />
+    </Key>
+    <Property Name="AttendanceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="LoginTime" Type="Time" Precision="7" />
+    <Property Name="LogoutTime" Type="Time" Precision="7" />
+    <Property Name="Late" Type="Time" Precision="7" />
+    <Property Name="OverTime" Type="Time" Precision="7" />
+    <Property Name="PartTime" Type="Time" Precision="7" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Attendanc__Emplo__286302EC" FromRole="Attendance" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Customar">
+    <Key>
+      <PropertyRef Name="CustomarId" />
+    </Key>
+    <Property Name="CustomarId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomarName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustMobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__CustomarI__32E0915F" FromRole="Customar" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpUserName" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EmpEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmpPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ImgPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="LoginTime" Type="Time" Precision="7" />
+    <Property Name="LogoutTime" Type="Time" Precision="7" />
+    <Property Name="RoletbId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Attendances" Relationship="Self.FK__Attendanc__Emplo__286302EC" FromRole="Employee" ToRole="Attendance" />
+    <NavigationProperty Name="Roletb" Relationship="Self.FK__Employee__Roletb__25869641" FromRole="Employee" ToRole="Roletb" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__Employ__3A81B327" FromRole="Employee" ToRole="Purchase" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__EmployeeI__33D4B598" FromRole="Employee" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ProductModels" Relationship="Self.FK__ProductMo__Produ__2D27B809" FromRole="Product" ToRole="ProductModel" />
+  </EntityType>
+  <EntityType Name="ProductModel">
+    <Key>
+      <PropertyRef Name="ProductModelId" />
+    </Key>
+    <Property Name="ProductModelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModelName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductMo__Produ__2D27B809" FromRole="ProductModel" ToRole="Product" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__Produc__38996AB5" FromRole="ProductModel" ToRole="Purchase" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK__Sales__ProductMo__31EC6D26" FromRole="ProductModel" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="PurchaseId" />
+    </Key>
+    <Property Name="PurchaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VoucherNo" Type="Int32" Nullable="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="ImgPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="ProductModelId" Type="Int32" Nullable="false" />
+    <Property Name="SupplierId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Purchase__Employ__3A81B327" FromRole="Purchase" ToRole="Employee" />
+    <NavigationProperty Name="ProductModel" Relationship="Self.FK__Purchase__Produc__38996AB5" FromRole="Purchase" ToRole="ProductModel" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK__Purchase__Suppli__398D8EEE" FromRole="Purchase" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Roletb">
+    <Key>
+      <PropertyRef Name="RoletbId" />
+    </Key>
+    <Property Name="RoletbId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RollName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__Roletb__25869641" FromRole="Roletb" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SalesId" />
+    </Key>
+    <Property Name="SalesId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemoNo" Type="Int32" Nullable="false" />
+    <Property Name="SalesDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="16" Scale="2" Nullable="false" />
+    <Property Name="ProductModelId" Type="Int32" Nullable="false" />
+    <Property Name="CustomarId" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Customar" Relationship="Self.FK__Sales__CustomarI__32E0915F" FromRole="Sales" ToRole="Customar" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__Sales__EmployeeI__33D4B598" FromRole="Sales" ToRole="Employee" />
+    <NavigationProperty Name="ProductModel" Relationship="Self.FK__Sales__ProductMo__31EC6D26" FromRole="Sales" ToRole="ProductModel" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="SupplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Purchases" Relationship="Self.FK__Purchase__Suppli__398D8EEE" FromRole="Supplier" ToRole="Purchase" />
+  </EntityType>
+  <Association Name="FK__Attendanc__Emplo__286302EC">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__CustomarI__32E0915F">
+    <End Role="Customar" Type="Self.Customar" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customar">
+        <PropertyRef Name="CustomarId" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="CustomarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Employee__Roletb__25869641">
+    <End Role="Roletb" Type="Self.Roletb" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roletb">
+        <PropertyRef Name="RoletbId" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoletbId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchase__Employ__3A81B327">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__EmployeeI__33D4B598">
+    <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="EmployeeId" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductMo__Produ__2D27B809">
+    <End Role="Product" Type="Self.Product" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductModel">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchase__Produc__38996AB5">
+    <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductModel">
+        <PropertyRef Name="ProductModelId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="ProductModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Sales__ProductMo__31EC6D26">
+    <End Role="ProductModel" Type="Self.ProductModel" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductModel">
+        <PropertyRef Name="ProductModelId" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="ProductModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Purchase__Suppli__398D8EEE">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MvcProjectDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+    <EntitySet Name="Customars" EntityType="Self.Customar" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductModels" EntityType="Self.ProductModel" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+    <EntitySet Name="Roletbs" EntityType="Self.Roletb" />
+    <EntitySet Name="Sales" EntityType="Self.Sale" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <AssociationSet Name="FK__Attendanc__Emplo__286302EC" Association="Self.FK__Attendanc__Emplo__286302EC">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Attendance" EntitySet="Attendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__CustomarI__32E0915F" Association="Self.FK__Sales__CustomarI__32E0915F">
+      <End Role="Customar" EntitySet="Customars" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Employee__Roletb__25869641" Association="Self.FK__Employee__Roletb__25869641">
+      <End Role="Roletb" EntitySet="Roletbs" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchase__Employ__3A81B327" Association="Self.FK__Purchase__Employ__3A81B327">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__EmployeeI__33D4B598" Association="Self.FK__Sales__EmployeeI__33D4B598">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductMo__Produ__2D27B809" Association="Self.FK__ProductMo__Produ__2D27B809">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductModel" EntitySet="ProductModels" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchase__Produc__38996AB5" Association="Self.FK__Purchase__Produc__38996AB5">
+      <End Role="ProductModel" EntitySet="ProductModels" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Sales__ProductMo__31EC6D26" Association="Self.FK__Sales__ProductMo__31EC6D26">
+      <End Role="ProductModel" EntitySet="ProductModels" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Purchase__Suppli__398D8EEE" Association="Self.FK__Purchase__Suppli__398D8EEE">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="Purchase" EntitySet="Purchases" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

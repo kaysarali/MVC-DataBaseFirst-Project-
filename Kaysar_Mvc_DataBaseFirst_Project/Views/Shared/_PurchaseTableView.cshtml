@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.PurchaseViewModel>
+@using PagedList.Mvc
+
+
+
+
+
+<table  class="producttable">
+    <thead>
+        <tr>
+            <th >
+                @Ajax.ActionLink("ID", "SearchCustomers", new { SortOrder = ViewBag.SortNameParam }, new AjaxOptions { UpdateTargetId = "TotalSalesTable", }, new { @id = "SortOrderlink", style="color:white"})
+            </th>
+
+            <th>VC</th>
+            <th>Date</th>
+
+            <th>Product</th>
+            <th>Supplier</th>
+
+            <th>Qty</th>
+            @*<th>Unit</th>*@
+            <th>Total</th>
+            <th>Emp</th>
+            <th>Image</th>
+            <th>Operations</th>
+        </tr>
+
+    </thead>
+    
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.PurchaseId)</td>
+            <td>@Html.DisplayFor(modelItem => item.VoucherNo)</td>
+            <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.PurchaseDate))</td>
+
+            <td>@Html.DisplayFor(modelItem => item.ProductName) @Html.DisplayFor(modelItem => item.ModelName)</td>
+            <td>@Html.DisplayFor(modelItem => item.SupplierName)</td>
+
+            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+            <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+            <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+
+            <td> <img class="prouuctimage" src="@Url.Content(item.ImgPath)" height="40" width="40" /></td>
+
+            <td>
+                <a class="btnEdit" href="javascript:void(0)" onclick='EditPurchase("@item.PurchaseId")'><i class='glyphicon glyphicon-edit'></i></a> &nbsp;
+                <a class="btnDetails" href="javascript:void(0)" onclick='DetailsPurchase("@item.PurchaseId")'> <i class='glyphicon glyphicon-eye-open'></i> </a> &nbsp;
+                <a class="btnDelete" href="javascript:void(0)" onclick='DeletePurchase("@item.PurchaseId")'> <i class='glyphicon glyphicon-trash'></i> </a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)of @Model.PageCount
+
+
+<div class="Purchase_Paging_Aria">
+    <div id="myPager" class="Purchase_Paging"> @Html.PagedListPager(Model, page => Url.Action("SearchCustomers", new { SortOrder = ViewBag.CurrrentSort, CurrentFilter = ViewBag.CurrentFilter, Page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<<", LinkToPreviousPageFormat = "Previous", LinkToNextPageFormat = "Next", LinkToLastPageFormat = ">>", }) </div>
+</div>
+
+
+
+
+
+<script>
+    $(function () {
+    $('#myPager').on('click', 'a', function() {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                //alert(result);
+                $('#TotalSalesTable').html(result);
+
+            }
+        });
+        return false;
+    });
+});
+</script>
+
+<script>
+    $("#LoadingStatus1").html("")
+</script>
+

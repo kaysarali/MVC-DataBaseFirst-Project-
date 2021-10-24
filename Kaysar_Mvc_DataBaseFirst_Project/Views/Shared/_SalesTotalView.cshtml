@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.SalesViewModel>
+
+
+<table class="producttable">
+    <thead>
+        <tr>
+            <th >Id</th>
+            <th style="padding:0px">Memo</th>
+            <th>Date</th>
+            <th>Customar</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Product</th>
+            <th style="padding:0px">Qty</th>
+            <th>Price</th>
+            <th>Emp</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SalesId)</td>
+                <td >@Html.DisplayFor(modelItem => item.MemoNo)</td>
+                <td>@Convert.ToString(string.Format("{0:dd/MM/yyyy}", item.SalesDate))</td>
+                <td>@Html.DisplayFor(modelItem => item.CustomarName)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustMobile)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustAddress)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductName) @Html.DisplayFor(modelItem => item.ModelName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.Raw(TempData["textboxblank"])
+
+
+@Html.Raw(TempData["InsertAction"])
+
+

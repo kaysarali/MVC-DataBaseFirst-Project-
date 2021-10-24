@@ -1,0 +1,429 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.SalesViewModel
+@{
+    ViewBag.Title = "SalesPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/CustomSales.js"></script>
+
+
+<div class="col-md-4 col-xl-4">
+
+    <div class="topleft"> <div class="title_text"><samp> <i class="icon-briefcase"></i> Sales</samp></div></div>
+
+    <div class="mainleft">
+
+        <div id="InsertSalesSection">
+
+            @using (Ajax.BeginForm("InsertSale", "Sales", new AjaxOptions { UpdateTargetId = "SalesTable" }))
+            {
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.AntiForgeryToken()
+                <table>
+                    <tr>
+                        <td colspan="2" class="textfield">
+                            <span> Sales Section</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="textelement">
+                            <input type="button" id="btnnewcust" value="New Customar" class="btn btn-success btnnewcust" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Memo No.</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.MemoNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.MemoNo, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="textfield">Sales Date</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.SalesDate, new { htmlAttributes = new { @class = "form-control", type = "date", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.SalesDate, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="textfield">Mobile No.</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.CustMobile, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => model.SalesDate, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Customar Name</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.CustomarName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Address</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.CustAddress, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Product Name</td>
+                        <td class="textelement">
+                            @Html.DropDownListFor(model => model.ProductId, new SelectList(ViewBag.ProductList, "ProductId", "ProductName"), "Select Product", htmlAttributes: new { @class = "form-control", id = "ddlProductName", style = "Padding : 0px;" })
+                            @Html.ValidationMessageFor(model => model.ProductId, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Product Model</td>
+                        <td class="textelement">
+                            @Html.DropDownListFor(model => model.ProductModelId, new SelectList(string.Empty, "Value", "Text"), "Select Product Model", new { @class = "form-control", id = "ddlProductModel", style = "Padding : 0px;" })
+                            @Html.ValidationMessageFor(model => model.ProductModelId, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Quentity</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="textfield">Unit Price</td>
+                        <td class="textelement">
+                            @Html.EditorFor(model => model.UnitPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Add Product" id="btnAddProduct" class="btn btn-success btninsert" />
+                        </td>
+                    </tr>
+
+                </table>
+            }
+
+
+            @Ajax.ActionLink("Sales Bill Print", "InsertTotalSales",
+           new { }, new AjaxOptions { UpdateTargetId = "TotalSalesTable", OnSuccess = "UpdateTempSaleTable()" },
+           new { id = "alinkTotalSale", @class = "btn btn-info btnbillprint" })
+
+
+
+
+        </div>
+
+        <!-- Edit Section Open-->
+        <div id="EditSection">
+            @if (ViewBag.EditSectionShow == "Show")
+            {
+                @Html.Partial("_SalesTempEdit", Model)
+                ViewBag.EditSectionShow = "";
+            }
+        </div>
+        <!-- Edit Section End-->
+
+    </div>
+
+</div>
+
+<div class="col-md-8 col-xl-8">
+    <div class="top_right">
+        <table>
+
+            <tr>
+                <td>
+                    <div class="div-filter">
+                        <span> <i class="fa fa-filter"></i> </span>
+                    </div>
+                </td>
+                <td style="min-width: 30px;"></td>
+
+                <td class="textfield" style="width: 110px;"> <b>Select Category :</b> 	</td>
+                <td class="textelement"><input class="form-control" type="text"></td>
+
+                <td style="min-width: 30px;"></td>
+
+                <td class="textfield" style="width: 80px;"> <b>Search By :</b> </td>
+                <td class="textelement"><input class="form-control" type="text"></td>
+
+
+                <td>
+                    <button type="button" class="btn btn-primary"> <div class="btn-icon"><i class="fa fa-search"></i></div> </button>
+                </td>
+
+
+            </tr>
+
+
+        </table>
+
+    </div>
+
+
+
+    <div class="mainsalesright">
+        <div id="TotalSalesTable"></div>
+    </div>
+
+    <div class="mainsalesright_bottom">
+        <div id="SalesTable"></div>
+    </div>
+</div>
+
+
+
+<div>
+    <a href="@Url.Action("CustomarBillReport")" id="btnCustomarbill" style="display:none">Report</a>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="modal-header">
+        <h3>Are you sure you want to delete this?</h3>
+    </div>*@
+
+
+<!-- Delete modal Section Open-->
+<div class="modal fade" id="DeleteModel">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+                <div class="toplogo">
+                    <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+                </div>
+            </div>
+
+
+            <div id="DeleteSection">
+                @if (ViewBag.DeleteSectionShow == "Show")
+                {
+                    @Html.Partial("_SalesTempDelete", Model)
+                    ViewBag.DeleteSectionShow = "";
+                }
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- Delete modal Section End-->
+@* =========================== ActionLink =========================== *@
+
+
+@Ajax.ActionLink("All Employee", "ShowSaleTempTable",
+        new { },
+        new AjaxOptions
+        {
+            UpdateTargetId = "SalesTable",
+        },
+        new { @id = "alinkload", @style = "Display:none" })
+
+
+
+
+@Ajax.ActionLink("All Sales", "PageLoadTotalSalesView",
+        new { },
+        new AjaxOptions
+        {
+            UpdateTargetId = "TotalSalesTable",
+        },
+        new { @id = "alinkTotalSaleload", @style = "Display:none" })
+
+
+@* =========================== Script =========================== *@
+<script>
+    $("document").ready(function () {
+        $("#alinkload")[0].click();
+        $("#alinkTotalSaleload")[0].click();
+    });
+</script>
+
+<script>
+    function UpdateTempSaleTable() {
+        $("#alinkload")[0].click();
+        //$.post("/Sales/CustomarBillReport");
+        $("#btnCustomarbill")[0].click();
+
+
+    }
+</script>
+
+<script>
+    $(function () {
+        $('#ddlProductName').change(function () {
+            $('#ddlProductModel').empty();
+            $.ajax({
+                type: "POST",
+                url: "/Sales/GetProductModelMethod",
+                datatype: "Json",
+                data: { ProductId: $('#ddlProductName').val() },
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        $('#ddlProductModel').append('<option value="' + value.ProductModelId + '">' + value.ModelName + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("[id$=btnnewcust]").on('click', function () {
+            $.ajax({
+                url: '/Sales/GetNewMemoNo',
+                type: "POST",
+                data: "{ 'name': '" + $(this).val() + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#alinkload").trigger("click");
+
+                    $("[id$=MemoNo]").val("");
+                    $("[id$=MemoNo]").val(data);
+
+                    $("#SalesDate").removeAttr('readonly');
+                    $("#CustMobile").removeAttr('readonly');
+                    $("#CustomarName").removeAttr('readonly');
+                    $("#CustAddress").removeAttr('readonly');
+
+                    $("[id$=SalesDate]").val("");
+                    $("[id$=CustMobile]").val("");
+                    $("[id$=CustomarName]").val("");
+                    $("[id$=CustAddress]").val("");
+
+                    $("[id$=ddlProductName]").val("");
+                    $("[id$=ddlProductModel]").val("");
+                    $("[id$=Quantity]").val("");
+                    $("[id$=UnitPrice]").val("");
+                }
+            });
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("[id$=CustMobile]").on('change', function () {
+            $.ajax({
+                url: '/Sales/GetCustomarinfo',
+                type: "POST",
+                data: "{ 'GetCustMobNum': '" + $(this).val() + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (result) {
+                    $("[id$=CustomarName]").val(result.CustName);
+                    $("[id$=CustAddress]").val(result.CustAddress);
+                }
+            });
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $('#btnAddProduct').click(
+            function () {
+                $("#SalesDate").attr("readonly", "readonly");
+                $("#SalesDate").attr("readonly", "readonly");
+                $("#CustMobile").attr("readonly", "readonly");
+                $("#CustomarName").attr("readonly", "readonly");
+                $("#CustAddress").attr("readonly", "readonly");
+            });
+    });
+</script>
+
+@*########### EditMethod ###########*@
+<script>
+    function EditMethod(SalesId) {
+
+        $.ajax({
+            url: "/Sales/Edits?id=" + SalesId,
+            type: "GET",
+            data: "",
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+                $('#EditSection').show();
+                $('#InsertSalesSection').hide();
+                $('#EditSection').html(data);
+            },
+            error: function () {
+                alert("Error occured")
+            }
+        });
+    }
+</script>
+@*########### EditMethod ###########*@
+
+
+
+@*########### DeleteMethod ###########*@
+<script>
+    function DeleteMethod(SalesId) {
+
+        $.ajax({
+            url: "/Sales/Delete?id=" + SalesId,
+            type: "GET",
+            data: "",
+            contentType: 'application/json;charset=utf-8',
+            success: function (data) {
+
+                //$('#EditSection').show();
+                //$('#InsertSalesSection').hide();
+                $('#DeleteSection').html(data);
+                $('#DeleteModel').modal('show');
+            },
+            error: function () {
+                alert("Error occured")
+            }
+        });
+    }
+</script>
+@*########### DeleteMethod ###########*@
+
+
+@* =========================== Script =========================== *@
+
+
+

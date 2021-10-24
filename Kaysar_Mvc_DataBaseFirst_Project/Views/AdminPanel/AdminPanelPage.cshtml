@@ -1,0 +1,303 @@
+﻿@model Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.EmployeeViewModel
+
+@{
+    ViewBag.Title = "AdminPanelPage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-3">
+    <div class="topleft">
+        <div class="title_text"><samp> <i class="icon-people"></i> Employee</samp></div>
+    </div>
+</div>
+
+<div class="col-md-9">
+    <div class="top_right admin_topRight">
+        @using (Ajax.BeginForm("EmployeeTable", "AdminPanel", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "TotalSalesTable", OnSuccess = "SearchOnSuccess" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <table>
+
+                <tr>
+                    <td> <a href="#" class="btn btn-succes" style="width:140px; color:white; background-color:Highlight; float:left; " onclick="AddNewEmployee(0)">Add New Employee</a> </td>
+
+                    <td style="min-width: 20px;"></td>
+                    <td><div class="div-filter">  <span><i class="fa fa-filter"></i></span></div></td>
+                    <td style="min-width: 10px;"></td>
+
+                    <td class="textfield" style="width: 110px;"> <b>Select Category :</b> 	</td>
+
+                    <td class="textelement">
+                        <select class="form-control" id="PurchaseCategory" name="EmployeeCategory" style="padding:0px">
+                            <option>Select Category</option>
+                            <option>Employee ID</option>
+                            <option>Employee Name</option>
+                        </select>
+                    </td>
+
+                    <td style="min-width: 30px;"></td>
+
+                    <td class="textfield" style="width: 80px;"> <b>Search By :</b> </td>
+
+                    <td class="textelement">
+                        @Html.TextBox("txtboxSearch", "", new { @class = "form-control txtboxSearch" })
+                    </td>
+
+                    <td>
+                        <button type="submit" class="btn btn-primary" id="btnSearch">
+                            <div class="btn-icon"><i class="fa fa-search"></i></div>
+                        </button>
+                    </td>
+
+
+                </tr>
+            </table>
+
+        }
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="mainright admin_topRight" style="height:300px">
+
+        <table><tr id="LoadingStatus1" style="color:red"> </tr></table>
+        <!--  Purchase Table Show-->
+        <div id="TotalSalesTable">
+
+        </div>
+
+
+
+        @Ajax.ActionLink("Refresh List", "EmployeeTable",
+    new { }, new AjaxOptions { UpdateTargetId = "TotalSalesTable", },
+    new { @id = "PurchaseTableShowlink"})
+
+    </div>
+</div>
+
+
+
+
+<div class="col-md-4">
+    <div class="topleft" style="margin-top:40px">
+        <div class="title_text"><samp style="font-size:33px"> <i class="icon-note"></i> Attendance </samp></div>
+    </div>
+</div>
+
+<div class="col-md-8">
+    <div class="top_right admin_topRight" style="margin-top:40px">
+        @using (Ajax.BeginForm("AttendanceTable", "AdminPanel", new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "AttendanceTableDiv", OnSuccess = "SearchOnSuccess" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <table>
+                <tr>
+                    <td class="textfield" style="width: 120px;"> <b>Select Date </b> </td>
+
+                    <td class="textelement"> @Html.TextBox("FirstDate", "", new { @class = "form-control", type = "date" }) </td>
+
+
+                    <td width="30"> </td>
+                    <td class="textelement"> @Html.TextBox("SecondDate", "", new { @class = "form-control", type = "date" }) </td>
+
+
+                    <td style="min-width: 10px;"></td>
+
+                    <td>
+                        <button type="submit" class="btn btn-primary" id="btnSearch">
+                            <div class="btn-icon"><i class="fa fa-search"></i></div>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+
+        }
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="mainright admin_topRight" style="height:300px">
+
+        <table><tr id="LoadingAttendanceTable" style="color:red"> </tr></table>
+        <!--  Purchase Table Show-->
+        <div id="AttendanceTableDiv"></div>
+
+
+        @Ajax.ActionLink("Refresh List", "AttendanceTable",
+       new { }, new AjaxOptions { UpdateTargetId = "AttendanceTableDiv", },
+       new { @id = "AttendanceTableShowlink"})
+        
+        <div class="report">
+            <a href="@Url.Action("ExportReport")" Style = "background-color: red; margin-left:10px" >Report</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:400px;">
+
+            <div class="modal-header">
+                <div class="toplogo" style="padding:10px 0px">
+                    <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+                </div>
+            </div>
+            <div class="modal-body" style="padding:30px 40px">
+
+                <!-- Insert Purchase Section Open-->
+                <div id="InsertPurchaseSection">
+
+                    @using (Ajax.BeginForm("InsertEmployee", "AdminPanel", new AjaxOptions { UpdateTargetId = "", OnSuccess = "getresult" }, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(s => s.EmployeeId, new { @id = "EmployeeId" })
+
+                        <table>
+                            <tr>
+                                <td class="textfield">Employee Name</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.EmpName, new { htmlAttributes = new { @id = "EmpName", @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmpName, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">User Name</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.EmpUserName, new { htmlAttributes = new { @id = "EmpUserName", @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmpUserName, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Addres</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.EmpAddress, new { htmlAttributes = new { @id = "EmpAddress", @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmpAddress, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Date Of Birth</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @id = "DateOfBirth", @class = "form-control", type = "Date" } })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Email Address</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.EmpEmail, new { htmlAttributes = new { @id = "EmpEmail", @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EmpEmail, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Password</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.EmpPassword, new { htmlAttributes = new { @id = "EmpPassword", @class = "form-control", type = "Password" } })
+                                    @Html.ValidationMessageFor(model => model.EmpPassword, "", new { @class = "text-danger" })
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Role</td>
+                                <td class="textelement">
+                                    @Html.DropDownListFor(s => s.RoletbId, ViewBag.DeptList as SelectList, "Select Role", new { @id = "DropDwn", @class = "form-control", style = "Padding:0px" })
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="textfield">Login Time</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.LoginTime, new { htmlAttributes = new { @class = "form-control", type = "Time" } })
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="textfield">Logout Time</td>
+                                <td class="textelement">
+                                    @Html.EditorFor(model => model.LogoutTime, new { htmlAttributes = new { @class = "form-control", type = "Time" } })
+
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td rowspan="2">
+                                    <img class="productimage" src="/images/App_images/noimageavailable.jpg" alt="" ID="ImgFile" height="80" width="80">
+                                </td>
+
+
+                                <td>
+                                    <input id="upimage" class="upimage" type="file" name="ImageFile" onchange="readURL(this);" style="display:none">
+                                    <label for="upimage" class="lebelupimage">Upload Image</label>
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2">
+                                    <input type="submit" value="Insert" id="btnEmpSave" class="btn btn-success btninsert" />
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </div>
+                <!-- Insert Purchase Section End-->
+
+            </div>
+
+            <div class="modal-footer" style="padding:20px 40px">
+                <a href="#" class="btn btn-default" data-dismiss="modal"> <b> Cancel</b></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Delete Purchase Section Open-->
+<div class="modal fade" id="DeleteConfirmation">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="toplogo">
+                    <a href="javascript:void(0)"> <img src="~/assets/images/App_images/delta_top_master_logo.jpg" alt=""></a>
+                </div>
+            </div>
+
+
+            <div class="modal-body">
+                @Html.HiddenFor(s => s.EmployeeId, new { @id = "DelEmployeeId" })
+                <h2 style="color:red; font-size:24px; font-weight:600; padding:20px 0 25px 10px">Are You Sure to Delete This Record?</h2>
+            </div>
+
+
+            <div class="modal-footer">
+                <a href="#" class="btn btn-danger" data-dismiss="modal" onclick="ConfirmDelete()">Delete</a>
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Delete Purchase Section End-->
+
+
+
+<script src="~/Scripts/CustomAdminPanel.js"></script>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Kaysar_Mvc_DataBaseFirst_Project.Models.ViewModels.SalesTempViewModel>
+
+
+
+
+<table class="producttable">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Memo</th>
+            <th>Date</th>
+            <th>Customar</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Emp</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.SalesId)</td>
+                <td>@Html.DisplayFor(modelItem => item.MemoNo)</td>
+                <td>@Convert.ToString(string.Format("{0:MM/dd/yyyy}", item.SalesDate))</td>
+                <td>@Html.DisplayFor(modelItem => item.CustomarName)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustMobile)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustAddress)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductName) @Html.DisplayFor(modelItem => item.ModelName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.EmpName)</td>
+
+
+                <td>
+                    <a class="btnEdit" href="javascript:void(0)" onclick='EditMethod("@item.SalesId")'><i class='glyphicon glyphicon-edit'></i></a> &nbsp;
+                    <a class="btnDelete" href="javascript:void(0)" onclick='DeleteMethod("@item.SalesId")'> <i class='glyphicon glyphicon-trash'></i> </a>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@Html.Raw(TempData["textboxblank"])
+@Html.Raw(TempData["Insert"])
+
+
+@Html.Raw(TempData["Update"])
+
+
+
